@@ -5,16 +5,7 @@ import signalsVideo from '../assets/signals.mp4';
 
 export default function SignalsRoom() {
   const ref = useRef(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.defaultMuted = true;
-      videoRef.current.muted = true;
-      videoRef.current.play().catch((err) => console.log("Autoplay prevented:", err));
-    }
-  }, [isInView]);
 
   return (
     <section className="py-24 bg-brand-bg relative overflow-hidden flex flex-col items-center border-y border-[rgba(57,255,20,0.1)]" id="sala-de-sinais" ref={ref}>
@@ -101,8 +92,6 @@ export default function SignalsRoom() {
           >
             <div className="relative z-10 w-full max-w-[850px] aspect-square shadow-[0_0_100px_rgba(56,189,248,0.2)] group rounded-[2.5rem] overflow-hidden mx-auto lg:mx-0 bg-[#0A140A] border border-sky-400/20">
               <video
-                ref={videoRef}
-                src={signalsVideo}
                 autoPlay
                 loop
                 muted
@@ -110,7 +99,9 @@ export default function SignalsRoom() {
                 preload="auto"
                 disablePictureInPicture
                 className="absolute inset-0 w-full h-full object-cover block transform transition-transform duration-700 group-hover:scale-[1.02]"
-              />
+              >
+                <source src={signalsVideo} type="video/mp4" />
+              </video>
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
 
