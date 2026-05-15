@@ -103,23 +103,23 @@ export default function SignalsRoom() {
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
 
-              <div className="absolute top-6 left-6 flex items-center gap-2 z-10 bg-black/60 px-4 py-2 rounded-full border border-brand-green/20 backdrop-blur-md">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)] animate-pulse" />
-                <span className="text-[11px] font-bold tracking-[0.2em] text-white uppercase">SALA VIP DE SINAIS PRIMEZYS</span>
+              <div className="absolute top-4 sm:top-6 left-4 sm:left-6 flex items-center gap-1.5 sm:gap-2 z-10 bg-black/60 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-brand-green/20 backdrop-blur-md scale-90 sm:scale-100 origin-top-left">
+                <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)] animate-pulse" />
+                <span className="text-[9px] sm:text-[11px] font-bold tracking-[0.2em] text-white uppercase">SALA VIP DE SINAIS</span>
               </div>
 
               {/* Floating Badge 1 - 80% Assertividade */}
               <motion.div 
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-8 right-6 z-20 flex items-center gap-3 bg-black/80 backdrop-blur-md p-3 rounded-2xl border border-brand-green/40 shadow-[0_0_30px_rgba(57,255,20,0.25)]"
+                className="absolute top-16 sm:top-8 right-4 sm:right-6 z-20 flex items-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-md p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-brand-green/40 shadow-[0_0_20px_rgba(57,255,20,0.25)] scale-90 sm:scale-100 origin-top-right"
               >
-                <div className="w-10 h-10 rounded-xl bg-brand-green/20 border border-brand-green/40 flex items-center justify-center shrink-0">
-                  <Zap size={20} className="text-brand-green" />
+                <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-brand-green/20 border border-brand-green/40 flex items-center justify-center shrink-0">
+                  <Zap size={16} className="text-brand-green sm:w-5 sm:h-5" />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase tracking-widest text-brand-muted font-bold">Taxa de Acerto</div>
-                  <div className="text-sm font-bold text-white leading-tight">80% de Assertividade</div>
+                  <div className="text-[8px] sm:text-[10px] uppercase tracking-widest text-brand-muted font-bold">Taxa de Acerto</div>
+                  <div className="text-xs sm:text-sm font-bold text-white leading-tight">80% de Assertividade</div>
                 </div>
               </motion.div>
 
@@ -127,14 +127,14 @@ export default function SignalsRoom() {
               <motion.div 
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-1/2 -translate-y-1/2 right-6 z-20 flex items-center gap-3 bg-black/80 backdrop-blur-md p-3 rounded-2xl border border-blue-400/40 shadow-[0_0_30px_rgba(96,165,250,0.25)]"
+                className="absolute bottom-6 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 right-4 sm:right-6 z-20 flex items-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-md p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-blue-400/40 shadow-[0_0_20px_rgba(96,165,250,0.25)] scale-90 sm:scale-100 origin-bottom-right sm:origin-right"
               >
-                <div className="w-10 h-10 rounded-xl bg-blue-400/20 border border-blue-400/40 flex items-center justify-center shrink-0">
-                  <Headset size={20} className="text-blue-400" />
+                <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-blue-400/20 border border-blue-400/40 flex items-center justify-center shrink-0">
+                  <Headset size={16} className="text-blue-400 sm:w-5 sm:h-5" />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase tracking-widest text-brand-muted font-bold">Suporte Primezys</div>
-                  <div className="text-sm font-bold text-white leading-tight">Atendimento até 23h</div>
+                  <div className="text-[8px] sm:text-[10px] uppercase tracking-widest text-brand-muted font-bold">Suporte Primezys</div>
+                  <div className="text-xs sm:text-sm font-bold text-white leading-tight">Atendimento até 23h</div>
                 </div>
               </motion.div>
             </div>
