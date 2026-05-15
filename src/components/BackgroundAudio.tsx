@@ -9,12 +9,12 @@ const playlist = [
 export default function BackgroundAudio() {
   const [isMuted, setIsMuted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [volume, setVolume] = useState(0.25);
+  const [volume, setVolume] = useState(0.3); // Balanced ambient volume
   const [currentTrack, setCurrentTrack] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Initialize and handle track completion
+  // Core Audio Initialization and Lifecycle
   useEffect(() => {
     const audio = new Audio(playlist[currentTrack]);
     audio.volume = volume;
@@ -27,7 +27,7 @@ export default function BackgroundAudio() {
     };
     audio.addEventListener('ended', handleEnded);
 
-    // Immediate muted autoplay attempt
+    // Initial attempt to play muted (allowed by browsers)
     const initPlay = async () => {
       try {
         await audio.play();
@@ -38,21 +38,23 @@ export default function BackgroundAudio() {
     };
     initPlay();
 
-    // Comprehensive unblocker for user interaction
+    // Comprehensive unblocker for user interaction to enable sound
     const unblockAudio = () => {
       if (!hasInteracted) {
-        console.log("User interaction detected - activating audio.");
+        console.log("First user interaction detected - activating audio.");
         setHasInteracted(true);
         if (audioRef.current) {
           audioRef.current.muted = isMuted; // Sync with actual mute state
           if (isPlaying && audioRef.current.paused) {
-            audioRef.current.play().catch(() => {});
+            audioRef.current.play().catch(e => console.error("Play failed on interaction:", e));
           }
         }
       }
+      // Clean up event listeners
+      interactEvents.forEach(event => window.removeEventListener(event, unblockAudio));
     };
 
-    const interactEvents = ['click', 'touchstart', 'mousedown', 'keydown', 'scroll', 'wheel', 'pointerdown'];
+    const interactEvents = ['click', 'touchstart', 'mousedown', 'keydown', 'scroll', 'wheel', 'pointerdown', 'mousemove'];
     interactEvents.forEach(event => window.addEventListener(event, unblockAudio, { once: true }));
 
     return () => {
