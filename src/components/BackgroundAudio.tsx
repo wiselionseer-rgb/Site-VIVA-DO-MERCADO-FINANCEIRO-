@@ -9,68 +9,42 @@ const playlist = [
 export default function BackgroundAudio() {
   const [isMuted, setIsMuted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [volume, setVolume] = useState(0.3);
+  const [volume, setVolume] = useState(0.25);
   const [currentTrack, setCurrentTrack] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  // Initialize and handle track completion
   useEffect(() => {
-    // Initialize audio with the first track
     const audio = new Audio(playlist[currentTrack]);
     audio.volume = volume;
     audio.loop = false;
-    audio.muted = true;
+    audio.muted = true; // Essential for browser autoplay permission
     audioRef.current = audio;
 
     const handleEnded = () => {
       setCurrentTrack((prev) => (prev + 1) % playlist.length);
     };
-
     audio.addEventListener('ended', handleEnded);
 
-    // Initial play attempt (muted)
-    audio.play().catch(() => {
-      console.log("Initial muted autoplay blocked");
-    });
-
-    return () => {
-      audio.removeEventListener('ended', handleEnded);
-      audio.pause();
-      audioRef.current = null;
+    // Immediate muted autoplay attempt
+    const initPlay = async () => {
+      try {
+        await audio.play();
+        console.log("Muted autoplay started successfully.");
+      } catch (err) {
+        console.warn("Muted autoplay blocked, waiting for interaction:", err);
+      }
     };
-  }, []);
+    initPlay();
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.src = playlist[currentTrack];
-      audioRef.current.muted = !hasInteracted ? true : isMuted;
-      if (isPlaying) {
-        audioRef.current.play().catch(() => {});
-      }
-    }
-  }, [currentTrack]);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.muted = !hasInteracted ? true : isMuted;
-      if (hasInteracted && !isMuted && isPlaying && audioRef.current.paused) {
-        audioRef.current.play().catch(() => {});
-      }
-    }
-  }, [isMuted, hasInteracted, isPlaying]);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
-
-  useEffect(() => {
-    const handleInteraction = () => {
+    // Comprehensive unblocker for user interaction
+    const unblockAudio = () => {
       if (!hasInteracted) {
+        console.log("User interaction detected - activating audio.");
         setHasInteracted(true);
         if (audioRef.current) {
-          audioRef.current.muted = isMuted;
+          audioRef.current.muted = isMuted; // Sync with actual mute state
           if (isPlaying && audioRef.current.paused) {
             audioRef.current.play().catch(() => {});
           }
@@ -78,13 +52,44 @@ export default function BackgroundAudio() {
       }
     };
 
-    const events = ['click', 'touchstart', 'mousedown', 'keydown', 'wheel', 'scroll', 'pointerdown'];
-    events.forEach(event => window.addEventListener(event, handleInteraction, { once: true }));
-    
+    const interactEvents = ['click', 'touchstart', 'mousedown', 'keydown', 'scroll', 'wheel', 'pointerdown'];
+    interactEvents.forEach(event => window.addEventListener(event, unblockAudio, { once: true }));
+
     return () => {
-      events.forEach(event => window.removeEventListener(event, handleInteraction));
+      audio.removeEventListener('ended', handleEnded);
+      audio.pause();
+      audioRef.current = null;
+      interactEvents.forEach(event => window.removeEventListener(event, unblockAudio));
     };
-  }, [hasInteracted, isMuted, isPlaying]);
+  }, []);
+
+  // Sync track changes
+  useEffect(() => {
+    if (audioRef.current) {
+      const wasPaused = audioRef.current.paused;
+      audioRef.current.src = playlist[currentTrack];
+      audioRef.current.muted = !hasInteracted ? true : isMuted;
+      if (isPlaying && (!wasPaused || hasInteracted)) {
+        audioRef.current.play().catch(() => {});
+      }
+    }
+  }, [currentTrack]);
+
+  // Sync state changes to Audio instance
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.muted = !hasInteracted ? true : isMuted;
+      audioRef.current.volume = volume;
+      
+      if (isPlaying) {
+        if (audioRef.current.paused && hasInteracted) {
+          audioRef.current.play().catch(() => {});
+        }
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [isMuted, isPlaying, volume, hasInteracted]);
 
   const toggleMute = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -92,11 +97,6 @@ export default function BackgroundAudio() {
       setHasInteracted(true);
     }
     setIsMuted(!isMuted);
-    
-    // If we were paused due to autoplay, resume now
-    if (audioRef.current && isPlaying && audioRef.current.paused) {
-      audioRef.current.play().catch(console.error);
-    }
   };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
