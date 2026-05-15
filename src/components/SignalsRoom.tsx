@@ -89,7 +89,7 @@ export default function SignalsRoom() {
             transition={{ duration: 1, delay: 0.2 }}
             className="flex-1 w-full relative perspective-1000 flex justify-center lg:justify-start"
           >
-            <div className="relative z-10 w-full max-w-[850px] shadow-[0_0_100px_rgba(56,189,248,0.2)] group rounded-[2.5rem] overflow-hidden mx-auto lg:mx-0 bg-black border border-sky-400/20">
+            <div className="relative z-10 w-full max-w-[850px] shadow-[0_0_100px_rgba(56,189,248,0.2)] group rounded-[2.5rem] overflow-hidden mx-auto lg:mx-0 bg-[#0A140A] border border-sky-400/20">
               <video
                 autoPlay
                 loop
@@ -97,24 +97,24 @@ export default function SignalsRoom() {
                 playsInline
                 className="w-full aspect-square object-cover block transform transition-transform duration-700 group-hover:scale-[1.02]"
               >
-                <source src="/signals_h264.mp4" type="video/mp4" />
+                <source src="/signals.mp4" type="video/mp4" />
                 Seu navegador não suporta a tag de vídeo.
               </video>
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
 
-              <div className="absolute top-4 sm:top-6 left-4 sm:left-6 flex items-center gap-1.5 sm:gap-2 z-10 bg-black/60 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-brand-green/20 backdrop-blur-md scale-90 sm:scale-100 origin-top-left">
+              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex items-center gap-1.5 sm:gap-2 z-10 bg-black/80 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-brand-green/30 backdrop-blur-md">
                 <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)] animate-pulse" />
                 <span className="text-[9px] sm:text-[11px] font-bold tracking-[0.2em] text-white uppercase">SALA VIP DE SINAIS</span>
               </div>
 
               {/* Floating Badge 1 - 80% Assertividade */}
               <motion.div 
-                animate={{ y: [0, -10, 0] }}
+                animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-16 sm:top-8 right-4 sm:right-6 z-20 flex items-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-md p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-brand-green/40 shadow-[0_0_20px_rgba(57,255,20,0.25)] scale-90 sm:scale-100 origin-top-right"
+                className="absolute top-14 sm:top-8 right-4 sm:right-6 z-20 flex items-center gap-2 sm:gap-3 bg-brand-bg/95 backdrop-blur-md p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-brand-green/40 shadow-[0_0_20px_rgba(57,255,20,0.15)] origin-top-right transform scale-90 sm:scale-100"
               >
-                <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-brand-green/20 border border-brand-green/40 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-brand-green/10 border border-brand-green/30 flex items-center justify-center shrink-0">
                   <Zap size={16} className="text-brand-green sm:w-5 sm:h-5" />
                 </div>
                 <div>
@@ -125,11 +125,11 @@ export default function SignalsRoom() {
 
               {/* Floating Badge 2 - Suporte */}
               <motion.div 
-                animate={{ y: [0, 10, 0] }}
+                animate={{ y: [0, 6, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-6 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 right-4 sm:right-6 z-20 flex items-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-md p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-blue-400/40 shadow-[0_0_20px_rgba(96,165,250,0.25)] scale-90 sm:scale-100 origin-bottom-right sm:origin-right"
+                className="absolute bottom-4 sm:bottom-8 right-4 sm:right-6 z-20 flex items-center gap-2 sm:gap-3 bg-brand-bg/95 backdrop-blur-md p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-blue-400/40 shadow-[0_0_20px_rgba(96,165,250,0.15)] origin-bottom-right transform scale-90 sm:scale-100"
               >
-                <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-blue-400/20 border border-blue-400/40 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-blue-400/10 border border-blue-400/30 flex items-center justify-center shrink-0">
                   <Headset size={16} className="text-blue-400 sm:w-5 sm:h-5" />
                 </div>
                 <div>
