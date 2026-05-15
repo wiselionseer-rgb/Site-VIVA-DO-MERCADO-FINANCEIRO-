@@ -1,11 +1,12 @@
 import { motion, useInView } from 'motion/react';
-import { useRef, useEffect } from 'react';
-import { ShieldCheck, Target, LineChart, Share2, ChevronRight, Zap, Headset } from 'lucide-react';
-import signalsVideo from '../assets/signals.mp4';
+import { useRef, useState, useEffect } from 'react';
+import { ShieldCheck, Target, LineChart, Share2, ChevronRight, Zap, Headset, AlertCircle } from 'lucide-react';
+import signalsVideo from '../assets/0515.mp4';
 
 export default function SignalsRoom() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [videoError, setVideoError] = useState<string | null>(null);
 
   return (
     <section className="py-24 bg-brand-bg relative overflow-hidden flex flex-col items-center border-y border-[rgba(57,255,20,0.1)]" id="sala-de-sinais" ref={ref}>
@@ -92,18 +93,29 @@ export default function SignalsRoom() {
           >
             <div className="relative z-10 w-full max-w-[850px] aspect-square shadow-[0_0_100px_rgba(56,189,248,0.2)] group rounded-[2.5rem] overflow-hidden mx-auto lg:mx-0 bg-[#0A140A] border border-sky-400/20">
               <video
+                src={signalsVideo}
                 autoPlay
                 loop
                 muted
                 playsInline
-                preload="auto"
-                disablePictureInPicture
-                className="absolute inset-0 w-full h-full object-cover block transform transition-transform duration-700 group-hover:scale-[1.02]"
-              >
-                <source src={signalsVideo} type="video/mp4" />
-              </video>
+                onLoadedData={() => console.log('Video loaded')}
+                onError={(e) => {
+                  console.error('Video error', e.currentTarget.error);
+                  setVideoError(e.currentTarget.error?.message || "O formato do vídeo não é suportado pelo seu navegador.");
+                }}
+                className={`absolute inset-0 w-full h-full object-cover block transform transition-transform duration-700 group-hover:scale-[1.02] z-0 ${videoError ? 'opacity-0' : 'opacity-100'}`}
+              />
+
+              {videoError && (
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 px-6 text-center">
+                  <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
+                  <p className="text-white text-lg font-bold">Erro ao carregar vídeo</p>
+                  <p className="text-gray-400 text-sm mt-2">{videoError}</p>
+                  <p className="text-gray-400 text-sm mt-4">Tente converter o vídeo para o formato MP4 (H.264) antes de subir.</p>
+                </div>
+              )}
               
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none z-10" />
 
               <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex items-center gap-1.5 sm:gap-2 z-10 bg-black/80 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-brand-green/30 backdrop-blur-md">
                 <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)] animate-pulse" />
