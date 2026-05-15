@@ -1,10 +1,20 @@
 import { motion, useInView } from 'motion/react';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { ShieldCheck, Target, LineChart, Share2, ChevronRight, Zap, Headset } from 'lucide-react';
+import signalsVideo from '../assets/signals.mp4';
 
 export default function SignalsRoom() {
   const ref = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch((err) => console.log("Autoplay prevented:", err));
+    }
+  }, [isInView]);
 
   return (
     <section className="py-24 bg-brand-bg relative overflow-hidden flex flex-col items-center border-y border-[rgba(57,255,20,0.1)]" id="sala-de-sinais" ref={ref}>
@@ -89,19 +99,18 @@ export default function SignalsRoom() {
             transition={{ duration: 1, delay: 0.2 }}
             className="flex-1 w-full relative perspective-1000 flex justify-center lg:justify-start"
           >
-            <div className="relative z-10 w-full max-w-[850px] shadow-[0_0_100px_rgba(56,189,248,0.2)] group rounded-[2.5rem] overflow-hidden mx-auto lg:mx-0 bg-[#0A140A] border border-sky-400/20">
+            <div className="relative z-10 w-full max-w-[850px] aspect-square shadow-[0_0_100px_rgba(56,189,248,0.2)] group rounded-[2.5rem] overflow-hidden mx-auto lg:mx-0 bg-[#0A140A] border border-sky-400/20">
               <video
+                ref={videoRef}
+                src={signalsVideo}
                 autoPlay
                 loop
                 muted
                 playsInline
-                preload="auto"
+                preload="metadata"
                 disablePictureInPicture
-                className="w-full aspect-square object-cover block transform transition-transform duration-700 group-hover:scale-[1.02]"
-              >
-                <source src="/signals.mp4?v=fixed_v2" type="video/mp4" />
-                Seu navegador não suporta a tag de vídeo.
-              </video>
+                className="absolute inset-0 w-full h-full object-cover block transform transition-transform duration-700 group-hover:scale-[1.02]"
+              />
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
 
