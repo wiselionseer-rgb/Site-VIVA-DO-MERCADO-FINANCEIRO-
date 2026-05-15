@@ -182,7 +182,7 @@ export default function Hero() {
       {/* Background Glows & Elements */}
       <div className="absolute top-1/2 right-[10%] lg:right-[20%] -translate-y-1/2 w-[600px] h-[600px] lg:w-[800px] lg:h-[800px] rounded-full border border-brand-green/30 shadow-[0_0_150px_rgba(57,255,20,0.1)] pointer-events-none z-0 lg:flex items-center justify-center overflow-hidden bg-black opacity-30 sm:opacity-100">
         <img 
-          src="/mentor-hero.png" 
+          src="./mentor-hero.png" 
           alt="Mentor" 
           className="w-full h-full object-cover object-center scale-[1.2] lg:scale-[1.1]"
         />

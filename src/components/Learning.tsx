@@ -1,6 +1,7 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
 import { Target, Shield, Gift, Rocket, Flame, Lock, GraduationCap, PlayCircle, BarChart3, Users, CheckCircle2 } from 'lucide-react';
+import bgVideo from '../assets/bg-video.mp4';
 
 export default function Learning() {
   const ref = useRef(null);
@@ -17,7 +18,7 @@ export default function Learning() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover opacity-40 z-0 pointer-events-none mix-blend-screen"
       >
-        <source src="/bg-video.mp4" type="video/mp4" />
+        <source src={bgVideo} type="video/mp4" />
       </video>
 
       {/* Background Animated Chart Arrows & Glows */}

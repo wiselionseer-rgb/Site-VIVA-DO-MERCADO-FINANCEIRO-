@@ -38,7 +38,7 @@ export default function About() {
               <div className="absolute inset-0 ring-1 ring-inset ring-brand-green/50 z-20 pointer-events-none" />
               
               <img 
-                src="/carlos-patreze.jpg" 
+                src="./carlos-patreze.jpg" 
                 alt="Carlos Patreze" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
