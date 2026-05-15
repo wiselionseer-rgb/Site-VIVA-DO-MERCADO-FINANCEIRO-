@@ -1,7 +1,6 @@
 import { motion, useInView } from 'motion/react';
 import { useRef, useEffect } from 'react';
 import { ShieldCheck, Target, LineChart, Share2, ChevronRight, Zap, Headset } from 'lucide-react';
-import signalsVideo from '../assets/signals.mp4';
 
 export default function SignalsRoom() {
   const ref = useRef(null);
@@ -102,15 +101,16 @@ export default function SignalsRoom() {
             <div className="relative z-10 w-full max-w-[850px] aspect-square shadow-[0_0_100px_rgba(56,189,248,0.2)] group rounded-[2.5rem] overflow-hidden mx-auto lg:mx-0 bg-[#0A140A] border border-sky-400/20">
               <video
                 ref={videoRef}
-                src={signalsVideo}
                 autoPlay
                 loop
                 muted
                 playsInline
-                preload="metadata"
+                preload="auto"
                 disablePictureInPicture
                 className="absolute inset-0 w-full h-full object-cover block transform transition-transform duration-700 group-hover:scale-[1.02]"
-              />
+              >
+                <source src="/signals.mp4" type="video/mp4" />
+              </video>
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
 
