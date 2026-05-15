@@ -4,10 +4,10 @@ import { ChevronLeft, ChevronRight, Quote, Instagram, Twitter, Linkedin } from '
 
 const teamMembers = [
   {
-    name: "Tiago Socicio",
+    name: "Tiago Passos",
     role: "Proprietário & Fundador da Primezys",
     image: "/tiago-socicio.jpg",
-    bio: "Visionário por trás da Primezys Investimentos, Tiago Socicio fundou a empresa com a missão de democratizar o acesso às estratégias de elite do mercado financeiro. Com foco em tecnologia e inovação, ele lidera a expansão da marca para transformar a vida de milhares de brasileiros.",
+    bio: "Visionário por trás da Primezys Investimentos, Tiago Passos fundou a empresa com a missão de democratizar o acesso às estratégias de elite do mercado financeiro. Com foco em tecnologia e inovação, ele lidera a expansão da marca para transformar a vida de milhares de brasileiros.",
     social: {
       instagram: "#",
       linkedin: "#"

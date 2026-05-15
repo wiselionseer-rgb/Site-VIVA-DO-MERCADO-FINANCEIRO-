@@ -4,9 +4,9 @@ import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 
 function AnimatedCounter({ end, prefix = '', suffix = '', currency = false, isVisible }: { end: number, prefix?: string, suffix?: string, currency?: boolean, isVisible: boolean }) {
   const count = useSpring(0, {
-    mass: 1,
-    tension: 50,
-    friction: 25,
+    bounce: 0,
+    stiffness: 100,
+    damping: 30,
   });
   
   const displayCount = useTransform(count, (latest) => {
