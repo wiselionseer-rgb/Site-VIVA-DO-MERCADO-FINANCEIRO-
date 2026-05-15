@@ -95,9 +95,11 @@ export default function SignalsRoom() {
                 loop
                 muted
                 playsInline
+                preload="auto"
+                disablePictureInPicture
                 className="w-full aspect-square object-cover block transform transition-transform duration-700 group-hover:scale-[1.02]"
               >
-                <source src="/signals.mp4" type="video/mp4" />
+                <source src="/signals.mp4?v=fixed_v2" type="video/mp4" />
                 Seu navegador não suporta a tag de vídeo.
               </video>
               
