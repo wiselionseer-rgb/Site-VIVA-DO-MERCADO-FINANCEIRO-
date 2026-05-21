@@ -7,6 +7,13 @@ export default function Learning() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const scrollToModules = () => {
+    const modulesSection = document.getElementById('modulos');
+    if (modulesSection) {
+      modulesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="py-24 bg-[#020602] relative overflow-hidden flex flex-col items-center border-t border-[rgba(57,255,20,0.1)]" ref={ref}>
       
@@ -84,7 +91,10 @@ export default function Learning() {
 
           {/* Center Button */}
           <div className="w-full lg:w-auto -mx-2 lg:mx-0 my-4 lg:my-0 relative z-20 flex justify-center">
-            <button className="w-[95%] lg:w-[420px] py-5 bg-brand-green hover:bg-[#a3ff20] text-black font-bold flex flex-col items-center rounded-xl md:rounded-full shadow-[0_0_40px_rgba(57,255,20,0.4)] hover:shadow-[0_0_60px_rgba(57,255,20,0.6)] transform hover:scale-105 transition-all animate-pulse-shadow cursor-pointer">
+            <button 
+              onClick={scrollToModules}
+              className="w-[95%] lg:w-[420px] py-5 bg-brand-green hover:bg-[#a3ff20] text-black font-bold flex flex-col items-center rounded-xl md:rounded-full shadow-[0_0_40px_rgba(57,255,20,0.4)] hover:shadow-[0_0_60px_rgba(57,255,20,0.6)] transform hover:scale-105 transition-all animate-pulse-shadow cursor-pointer"
+            >
               <span className="text-3xl md:text-4xl font-heading tracking-widest uppercase text-black">COMECE AGORA</span>
               <span className="text-[10px] md:text-xs tracking-widest uppercase mt-1 font-extrabold flex items-center gap-1">
                 E acesse todos os conteúdos gratuitos <span className="text-base font-bold">&gt;</span>
@@ -180,7 +190,10 @@ export default function Learning() {
           </div>
 
           <div className="w-full lg:w-auto flex flex-col items-center relative z-10 shrink-0">
-            <button className="w-full lg:w-auto px-8 lg:px-12 py-5 bg-[#ff6b00] hover:bg-[#ff8c33] text-white font-heading text-xl md:text-2xl tracking-widest rounded-xl md:rounded-2xl uppercase transition-all shadow-[0_0_30px_rgba(255,107,0,0.4)] hover:shadow-[0_0_50px_rgba(255,107,0,0.6)] hover:scale-105 flex items-center justify-center gap-3 cursor-pointer">
+            <button 
+              onClick={scrollToModules}
+              className="w-full lg:w-auto px-8 lg:px-12 py-5 bg-[#ff6b00] hover:bg-[#ff8c33] text-white font-heading text-xl md:text-2xl tracking-widest rounded-xl md:rounded-2xl uppercase transition-all shadow-[0_0_30px_rgba(255,107,0,0.4)] hover:shadow-[0_0_50px_rgba(255,107,0,0.6)] hover:scale-105 flex items-center justify-center gap-3 cursor-pointer"
+            >
               QUERO COMEÇAR AGORA <span className="text-2xl font-bold">&rarr;</span>
             </button>
             <div className="flex items-center justify-center gap-2 mt-5 text-white/60 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase">

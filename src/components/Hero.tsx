@@ -188,6 +188,16 @@ export default function Hero() {
         />
       </div>
       
+      {/* Floating Logo Badges - Outside overflow-hidden container */}
+      <div className="absolute top-1/2 right-[10%] lg:right-[15%] -translate-y-1/2 w-[600px] h-[600px] lg:w-[800px] lg:h-[800px] pointer-events-none z-20 hidden lg:block">
+        <div className="absolute top-[30%] left-[0%] w-24 h-24 lg:w-28 lg:h-28 rounded-full border border-brand-green/40 shadow-[0_0_30px_rgba(57,255,20,0.4)] overflow-hidden z-20 animate-float" style={{ animationDelay: '0.5s' }}>
+          <img src="/primezys-badge.jpg" alt="Primezys" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute top-[2%] right-[-8%] w-20 h-20 lg:w-26 lg:h-26 rounded-full border border-brand-green/40 shadow-[0_0_30px_rgba(57,255,20,0.4)] overflow-hidden z-20 animate-float" style={{ animationDelay: '1.5s' }}>
+          <img src="/primezys-badge.jpg" alt="Primezys" className="w-full h-full object-cover" />
+        </div>
+      </div>
+      
       {/* 3D Arrow SVG */}
       <svg className="absolute -right-20 lg:right-0 top-[10%] w-[500px] h-[700px] pointer-events-none z-0 opacity-80" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M 50 500 C 120 380, 250 200, 360 80" stroke="url(#paint0_linear)" strokeWidth="6" strokeLinecap="round" style={{filter: 'drop-shadow(0 0 25px #39FF14)'}} />

@@ -9,10 +9,15 @@ export default function Footer() {
             Ainda tem dúvidas? <span className="text-brand-green">Fale diretamente comigo!</span>
           </h2>
           
-          <button className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white rounded-md font-bold text-lg hover:opacity-90 transition-opacity uppercase animate-pulse-shadow">
+          <a 
+            href="https://wa.me/5566996280883"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white rounded-md font-bold text-lg hover:opacity-90 transition-opacity uppercase animate-pulse-shadow"
+          >
             <MessageCircle fill="currentColor" />
             Falar no WhatsApp
-          </button>
+          </a>
         </div>
       </section>
 
