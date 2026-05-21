@@ -1,4 +1,4 @@
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, Instagram, Youtube } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -9,15 +9,38 @@ export default function Footer() {
             Ainda tem dúvidas? <span className="text-brand-green">Fale diretamente comigo!</span>
           </h2>
           
-          <a 
-            href="https://wa.me/5566996280883"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white rounded-md font-bold text-lg hover:opacity-90 transition-opacity uppercase animate-pulse-shadow"
-          >
-            <MessageCircle fill="currentColor" />
-            Falar no WhatsApp
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <a 
+              href="https://wa.me/5566996280883"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white rounded-md font-bold text-lg hover:opacity-90 transition-opacity uppercase animate-pulse-shadow w-full sm:w-auto"
+            >
+              <MessageCircle fill="currentColor" />
+              Falar no WhatsApp
+            </a>
+
+            <div className="flex items-center gap-4">
+              <a 
+                href="https://www.instagram.com/trader_carlospatreze/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-14 h-14 rounded-md bg-white/5 flex items-center justify-center text-white/50 hover:text-brand-green hover:bg-brand-green/10 transition-all border border-white/10 hover:border-brand-green/30"
+                title="Siga no Instagram"
+              >
+                <Instagram size={28} />
+              </a>
+              <a 
+                href="#" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-14 h-14 rounded-md bg-white/5 flex items-center justify-center text-white/50 hover:text-brand-green hover:bg-brand-green/10 transition-all border border-white/10 hover:border-brand-green/30"
+                title="Inscreva-se no Youtube"
+              >
+                <Youtube size={28} />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 

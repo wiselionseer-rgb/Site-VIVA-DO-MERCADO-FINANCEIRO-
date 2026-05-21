@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Users, ShieldCheck, Target, Lock, TrendingUp, Trophy } from 'lucide-react';
+import { Users, ShieldCheck, Target, Lock, TrendingUp, Trophy, Instagram, Youtube } from 'lucide-react';
 import { motion } from 'motion/react';
 
 function CanvasMarketBg() {
@@ -254,6 +254,25 @@ export default function Hero() {
               <Lock className="text-brand-green" size={24} />
               <span className="max-w-[100px] leading-tight">Suporte Exclusivo</span>
             </div>
+          </div>
+
+          <div className="flex items-center gap-4 mt-4 pt-4 border-t border-white/5 w-full">
+            <a 
+              href="https://www.instagram.com/trader_carlospatreze/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/50 hover:text-brand-green hover:bg-brand-green/10 transition-all border border-white/10 hover:border-brand-green/30"
+            >
+              <Instagram size={20} />
+            </a>
+            <a 
+              href="#" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/50 hover:text-brand-green hover:bg-brand-green/10 transition-all border border-white/10 hover:border-brand-green/30"
+            >
+              <Youtube size={20} />
+            </a>
           </div>
         </motion.div>
 
