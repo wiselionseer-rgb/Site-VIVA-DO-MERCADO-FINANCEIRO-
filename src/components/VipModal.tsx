@@ -233,9 +233,9 @@ export default function VipModal({ isOpen, onClose }: { isOpen: boolean, onClose
                   Todos os módulos estão desbloqueados.
                 </p>
                 <div className="flex flex-col gap-3">
-                  <button onClick={onClose} className="w-full py-3 bg-brand-green text-black font-bold rounded-xl uppercase tracking-wider hover:bg-[#a3ff20] transition-colors">
+                  <a href="#modulos" onClick={onClose} className="w-full py-3 bg-brand-green text-black font-bold rounded-xl uppercase tracking-wider hover:bg-[#a3ff20] transition-colors block text-center">
                     Acessar Módulos
-                  </button>
+                  </a>
                   <button onClick={logout} className="w-full py-3 bg-white/5 text-white font-bold rounded-xl uppercase tracking-wider hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
                     <LogOut size={18} /> Sair
                   </button>
