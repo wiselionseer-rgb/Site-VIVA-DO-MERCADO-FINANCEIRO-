@@ -1,6 +1,7 @@
-import { useRef, MouseEvent, useState, useEffect } from 'react';
+import { useRef, MouseEvent, useState, useEffect, useContext } from 'react';
 import { motion, useInView, AnimatePresence } from 'motion/react';
-import { Lock, ChevronLeft, ChevronRight, AlertCircle } from 'lucide-react';
+import { Lock, ChevronLeft, ChevronRight, AlertCircle, Play } from 'lucide-react';
+import { AuthContext } from '../context/AuthContext';
 
 interface ModuleItem {
   id: string;
@@ -45,7 +46,7 @@ const CAROUSELS = [
   }
 ];
 
-function CarouselLine({ data, onShowMessage }: { data: any, onShowMessage: () => void, key?: any }) {
+function CarouselLine({ data, onShowMessage, isUserVip }: { data: any, onShowMessage: (locked: boolean) => void, isUserVip: boolean, key?: any }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -81,8 +82,8 @@ function CarouselLine({ data, onShowMessage }: { data: any, onShowMessage: () =>
   };
 
   return (
-    <div className="mb-12 relative group">
-      <h3 className={`text-lg font-bold mb-4 font-heading tracking-widest px-6 lg:px-12 ${data.color}`}>
+    <div className="mb-16 relative group">
+      <h3 className={`text-xl font-bold mb-6 font-heading tracking-widest px-6 lg:px-12 ${data.color}`}>
         {data.title}
       </h3>
       
@@ -99,16 +100,23 @@ function CarouselLine({ data, onShowMessage }: { data: any, onShowMessage: () =>
         onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
-        className="flex gap-4 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-6 lg:px-12 pb-8 cursor-grab active:cursor-grabbing"
+        className="flex gap-6 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-6 lg:px-12 pb-12 cursor-grab active:cursor-grabbing"
       >
-        {data.items.map((item: ModuleItem, i: number) => (
-          <div 
+        {data.items.map((item: ModuleItem, i: number) => {
+          const isActivelyLocked = item.locked && !isUserVip;
+          
+          return (
+          <motion.div 
             key={i} 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
             onClick={() => {
-              if (!dragged) onShowMessage();
+              if (!dragged) onShowMessage(isActivelyLocked);
             }}
-            className={`flex-none w-[240px] h-[340px] rounded-md relative overflow-hidden snap-start transition-transform duration-300 transform-gpu cursor-pointer
-              ${item.locked ? 'filter grayscale brightness-50 hover:brightness-100 hover:scale-[1.02]' : 'hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(57,255,20,0.5)] hover:z-10'}
+            className={`flex-none w-[280px] h-[400px] sm:w-[320px] sm:h-[460px] rounded-xl relative overflow-hidden snap-center transition-all duration-500 transform-gpu cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)] group/card
+              ${isActivelyLocked ? 'filter grayscale brightness-50 hover:brightness-100 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(255,215,0,0.3)] hover:z-10' : 'hover:scale-[1.05] hover:shadow-[0_0_40px_rgba(57,255,20,0.5)] hover:z-10 border border-transparent hover:border-brand-green/50'}
             `}
           >
             {item.image ? (
@@ -121,28 +129,42 @@ function CarouselLine({ data, onShowMessage }: { data: any, onShowMessage: () =>
               {item.id}
             </div>
 
-            {!item.locked && (
+            {!isActivelyLocked && !item.locked && (
               <div className="absolute top-3 left-3 bg-brand-green text-black text-[10px] font-bold px-2 py-0.5 rounded-sm">
                 GRÁTIS
               </div>
             )}
+            
+            {!isActivelyLocked && item.locked && (
+              <div className="absolute top-3 left-3 bg-brand-gold text-black text-[10px] font-bold px-2 py-0.5 rounded-sm">
+                VIP
+              </div>
+            )}
+            
+            {!isActivelyLocked && (
+               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity bg-black/40 z-20 backdrop-blur-[2px]">
+                 <div className="w-16 h-16 rounded-full bg-brand-green/90 flex items-center justify-center shadow-[0_0_30px_rgba(57,255,20,0.5)] scale-90 group-hover/card:scale-100 transition-transform duration-300">
+                    <Play className="text-black ml-1" size={32} fill="currentColor" />
+                 </div>
+               </div>
+            )}
 
-            {item.locked && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-black/80 z-20">
-                <Lock className="text-brand-gold mb-2" size={32} />
-                <span className="text-sm font-bold text-white mb-4">Conteúdo Exclusivo</span>
-                <span className="text-brand-gold border border-brand-gold px-4 py-1.5 rounded text-xs font-bold hover:bg-brand-gold hover:text-black transition-colors pointer-events-auto">
+            {isActivelyLocked && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-500 bg-black/80 z-20 backdrop-blur-sm">
+                <Lock className="text-brand-gold mb-3" size={40} />
+                <span className="text-base font-bold text-white mb-6 uppercase tracking-wider">Conteúdo Exclusivo</span>
+                <span className="text-brand-gold border-2 border-brand-gold px-6 py-2 rounded-md text-xs font-bold hover:bg-brand-gold hover:text-black transition-all hover:shadow-[0_0_20px_rgba(255,215,0,0.5)] hover:scale-105 pointer-events-auto">
                   Desbloquear &rarr;
                 </span>
               </div>
             )}
 
-            <div className="absolute bottom-0 left-0 p-4 w-full">
-              <h4 className="font-bold text-sm leading-tight mb-1">{item.title}</h4>
-              <p className="text-[11px] text-brand-muted">{item.desc}</p>
+            <div className="absolute bottom-0 left-0 p-6 w-full">
+              <h4 className="font-bold text-lg leading-tight mb-2">{item.title}</h4>
+              <p className="text-sm text-brand-muted">{item.desc}</p>
             </div>
-          </div>
-        ))}
+          </motion.div>
+        )})}
       </div>
 
       <button 
@@ -158,19 +180,25 @@ function CarouselLine({ data, onShowMessage }: { data: any, onShowMessage: () =>
 export default function Modules() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [showNotification, setShowNotification] = useState(false);
+  const [notification, setNotification] = useState<{show: boolean, type: 'locked' | 'play'}>({show: false, type: 'locked'});
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    if (showNotification) {
-      const timer = setTimeout(() => setShowNotification(false), 4000);
+    if (notification.show) {
+      const timer = setTimeout(() => setNotification({show: false, type: 'locked'}), 4000);
       return () => clearTimeout(timer);
     }
-  }, [showNotification]);
+  }, [notification.show]);
 
   return (
-    <section id="modulos" className="py-24 bg-[#020502] relative border-t border-[rgba(57,255,20,0.1)]" ref={ref}>
+    <section id="modulos" className="py-24 bg-[#020502] relative border-t border-[rgba(57,255,20,0.1)] overflow-hidden" ref={ref}>
+      {/* Neon Light Blobs */}
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-brand-green/20 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-brand-gold/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[300px] h-[300px] bg-brand-green/10 rounded-full blur-[100px] pointer-events-none" />
+
       <AnimatePresence>
-        {showNotification && (
+        {notification.show && notification.type === 'locked' && (
           <motion.div 
             initial={{ opacity: 0, y: -50, x: '-50%' }}
             animate={{ opacity: 1, y: 0, x: '-50%' }}
@@ -181,13 +209,38 @@ export default function Modules() {
               <AlertCircle className="text-brand-green" size={24} />
             </div>
             <div>
-              <h5 className="text-brand-green font-bold text-sm mb-1 uppercase tracking-wider">Acesso em Breve</h5>
+              <h5 className="text-brand-green font-bold text-sm mb-1 uppercase tracking-wider">Conteúdo Bloqueado</h5>
               <p className="text-xs text-brand-muted leading-relaxed">
-                Este módulo está em manutenção e será liberado em breve. Estamos preparando as melhores aulas para sua evolução!
+                Este módulo está disponível apenas para alunos no plano VIP ou Black. Se já for aluno, faça login na Área VIP acima.
               </p>
             </div>
             <button 
-              onClick={() => setShowNotification(false)}
+              onClick={() => setNotification({show: false, type: 'locked'})}
+              className="ml-auto text-brand-muted hover:text-white"
+            >
+              &times;
+            </button>
+          </motion.div>
+        )}
+        
+        {notification.show && notification.type === 'play' && (
+          <motion.div 
+            initial={{ opacity: 0, y: -50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: -50, x: '-50%' }}
+            className="fixed top-8 left-1/2 z-[100] w-[90%] max-w-md bg-brand-card border border-brand-green/30 p-4 rounded-xl shadow-[0_0_30px_rgba(57,255,20,0.2)] flex items-start gap-4"
+          >
+             <div className="bg-brand-green/20 p-2 rounded-full">
+              <Play className="text-brand-green" size={24} fill="currentColor" />
+            </div>
+            <div>
+              <h5 className="text-brand-green font-bold text-sm mb-1 uppercase tracking-wider">Acesso em Breve</h5>
+              <p className="text-xs text-brand-muted leading-relaxed">
+                As aulas estão sendo processadas pela plataforma e serão liberadas na próxima atualização da plataforma.
+              </p>
+            </div>
+            <button 
+              onClick={() => setNotification({show: false, type: 'locked'})}
               className="ml-auto text-brand-muted hover:text-white"
             >
               &times;
@@ -210,7 +263,7 @@ export default function Modules() {
 
       <div className="relative">
         {CAROUSELS.map((carousel, i) => (
-          <CarouselLine key={i} data={carousel} onShowMessage={() => setShowNotification(true)} />
+          <CarouselLine key={i} data={carousel} onShowMessage={(locked) => setNotification({show: true, type: locked ? 'locked' : 'play'})} isUserVip={!!user} />
         ))}
       </div>
     </section>

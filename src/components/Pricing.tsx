@@ -23,7 +23,7 @@ export default function Pricing() {
       name: "CURSO RETRAÇÃO M1",
       price: "599,90",
       period: " único",
-      features: ["6 módulos completos", "Acesso vitalício", "Todas atualizações"],
+      features: ["Acesso a todos os modulos curso completo", "Acesso vitalício", "Todas atualizações", "Acesso à Área VIP"],
       button: "COMPRAR",
       link: "https://wa.me/5566996280883",
       style: "border-[rgba(57,255,20,0.3)] bg-brand-card hover:border-[rgba(57,255,20,0.6)] hover:shadow-[0_0_20px_rgba(57,255,20,0.15)]",
@@ -35,19 +35,18 @@ export default function Pricing() {
       badge: "⭐ MAIS POPULAR",
       price: "1.290,90",
       period: "/mês",
-      features: ["Tudo do curso", "Aulas ao vivo semanais", "Comunidade premium", "Sinais inclusos"],
+      features: ["Tudo do curso", "Aulas ao vivo semanais", "Comunidade premium", "Sinais inclusos", "Acesso à Área VIP"],
       button: "QUERO COMEÇAR",
       link: "https://wa.me/5566996280883",
       style: "border-brand-green bg-[rgba(57,255,20,0.05)] scale-100 lg:scale-105 z-10 shadow-[0_0_40px_rgba(57,255,20,0.25)]",
       btnStyle: "bg-brand-green text-black animate-pulse-shadow uppercase font-bold hover:bg-[#a3ff20]",
-      guarantee: "🛡 Garantia incondicional de 7 dias",
       delay: 0.3
     },
     {
       name: "MENTORIA INDIVIDUAL",
       price: "4.990,00",
       period: "",
-      features: ["Tudo do grupo", "Sessões 1:1", "Acompanhamento diário", "Plano personalizado"],
+      features: ["Tudo do grupo", "Sessões 1:1", "Acompanhamento diário", "Plano personalizado", "Acesso à Área VIP"],
       button: "QUERO 1:1",
       link: "https://wa.me/5566996280883",
       style: "border-[rgba(255,215,0,0.2)] bg-brand-card hover:border-[rgba(255,215,0,0.4)]",
@@ -60,7 +59,7 @@ export default function Pricing() {
       scratched: "R$ 6.990,00",
       price: "6.990,00",
       period: "",
-      features: ["Tudo incluso", "Suporte vitalício", "Futuros cursos GRÁTIS", "Sala VIP / Mastermind"],
+      features: ["Tudo incluso", "Suporte vitalício", "Futuros cursos GRÁTIS", "Sala VIP / Mastermind", "Acesso à Área VIP"],
       button: "QUERO O BLACK",
       link: "https://wa.me/5566996280883",
       style: "border-[rgba(255,215,0,0.3)] bg-black shadow-[0_0_20px_rgba(255,215,0,0.05)]",
@@ -287,11 +286,19 @@ export default function Pricing() {
                   {plan.button}
                 </button>
                 
-                {plan.guarantee && (
-                  <div className="text-center text-xs text-brand-muted flex items-center justify-center gap-1 mt-2">
-                    {plan.guarantee}
+                <div className="mt-2 flex flex-col items-center justify-center">
+                  <div className={`flex items-center gap-1.5 text-xs font-bold px-2 py-1 rounded-md border mb-1 
+                    ${plan.badge?.includes('BLACK') || plan.name.includes('INDIVIDUAL') 
+                      ? 'bg-brand-gold/10 text-brand-gold border-brand-gold/20' 
+                      : 'bg-brand-green/10 text-brand-green border-brand-green/20'}`
+                  }>
+                    <ShieldCheck size={14} />
+                    Garantia 7 e 30 Dias*
                   </div>
-                )}
+                  <p className="text-[10px] text-brand-muted text-center leading-tight">
+                    Garantimos seu resultado ou<br/>seu dinheiro de volta
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}
