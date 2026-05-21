@@ -19,9 +19,10 @@ export default function VipModal({ isOpen, onClose }: { isOpen: boolean, onClose
 
   if (!isOpen) return null;
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if(login(email, pass)) {
+    const success = await login(email, pass);
+    if(success) {
       setError('');
     } else {
       setError('Credenciais inválidas.');
