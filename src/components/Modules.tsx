@@ -21,6 +21,7 @@ const CAROUSELS = [
       { id: "B01", title: "Configurando a Conta", desc: "Setup inicial corretora.", locked: false, image: "/B01_v2.png" },
       { id: "B02", title: "Psicologia Básica", desc: "Mindset trader.", locked: false, image: "/B02.jpg" },
       { id: "S01", title: "Sala de Sinais Primezys", desc: "80% de assertividade sem martingale.", locked: false, image: "/primezys-badge.jpg" },
+      { id: "L01", title: "Lives todos os dias", desc: "Acompanhe ao vivo nossas análises.", locked: false, image: "/MC01.jpg" },
     ]
   },
   {
