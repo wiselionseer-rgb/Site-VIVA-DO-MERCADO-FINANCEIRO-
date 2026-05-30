@@ -81,34 +81,41 @@ export default function Pricing() {
 
   const subscriptionOptions = [
     {
-      title: "Mensal",
+      title: "START",
       price: "R$ 197,00",
-      desc: "Pagamento mês a mês",
+      desc: "Acesso ao essencial",
       link: "https://pay.kiwify.com.br/v9OLrDx",
+      icon: <Target className="text-white" size={20} />
+    },
+    {
+      title: "PRO Mensal",
+      price: "R$ 297,00",
+      desc: "Sem fidelidade",
+      link: "https://pay.kiwify.com.br/HRyjtQZ",
+      isPopular: true,
       icon: <Calendar className="text-brand-green" size={20} />
     },
     {
-      title: "Trimestral",
-      price: "R$ 539,70",
-      subprice: "ou 3x de R$ 192,60",
-      desc: "Economize garantindo 3 meses",
+      title: "PRO Trimestral",
+      price: "R$ 697,00",
+      subprice: "ou 3x de R$ 248,74",
+      desc: "Economize R$ 194",
       link: "https://pay.kiwify.com.br/LAMEKnd",
-      isPopular: true,
       icon: <Zap className="text-brand-gold" size={20} />
     },
     {
-      title: "Semestral",
-      price: "R$ 959,40",
-      subprice: "ou até 6x de R$ 179,99",
-      desc: "Ideal para consistência plena",
+      title: "PRO Semestral",
+      price: "R$ 1.117,00",
+      subprice: "ou 6x de R$ 209,73",
+      desc: "Economize R$ 665",
       link: "https://pay.kiwify.com.br/1aQKXyS",
       icon: <Target className="text-sky-400" size={20} />
     },
     {
-      title: "Anual",
-      price: "R$ 1.119,00",
-      subprice: "ou até 12x de R$ 115,73",
-      desc: "O melhor custo-benefício",
+      title: "PRO Anual",
+      price: "R$ 1.697,00",
+      subprice: "ou 12x de R$ 175,51",
+      desc: "Economize R$ 1.867",
       link: "https://pay.kiwify.com.br/xEGkCLF",
       icon: <Check className="text-brand-green" size={20} />
     }
@@ -131,7 +138,7 @@ export default function Pricing() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-3xl max-h-[90vh] overflow-y-auto bg-brand-card border border-brand-green/30 p-6 sm:p-10 rounded-3xl z-[101] shadow-[0_0_100px_rgba(57,255,20,0.15)] h-fit"
+              className="fixed inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-5xl max-h-[90vh] overflow-y-auto bg-brand-card border border-brand-green/30 p-6 sm:p-10 rounded-3xl z-[101] shadow-[0_0_100px_rgba(57,255,20,0.15)] h-fit"
             >
               <button 
                 onClick={() => setShowPlansModal(false)}
@@ -148,26 +155,47 @@ export default function Pricing() {
                   PLANOS <span className="text-brand-green">PRIMEZYS</span>
                 </h3>
                 <p className="text-brand-muted text-sm leading-relaxed max-w-xl">
-                  Selecione a melhor opção para sua jornada. Todos os planos incluem acesso total à nossa sala de sinais e suporte exclusivo.
+                  Selecione a melhor opção para sua jornada. Conheça as vantagens do nosso ecossistema Start & Pro.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-                <div className="col-span-full">
-                  <h4 className="text-xs font-bold text-brand-green uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <Zap size={14} /> O que você vai receber:
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                <div className="bg-black/40 border border-white/5 rounded-2xl p-6">
+                  <h4 className="text-sm font-bold text-white uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <Target size={16} className="text-gray-400" /> Start
                   </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+                  <div className="flex flex-col gap-3">
                     {[
                       "Sinais ao vivo no Telegram",
-                      "Operações das 22:00 às 17:00",
-                      "Indicador Primezys",
-                      "Sinal visual da vela da operação",
-                      "Marcação automática de entrada",
-                      "Suporte Primezys",
-                      "Auxílio para ativação & uso"
+                      "Indicador Primezys M1 💎",
+                      "Sinal visual + ponto de entrada",
+                      "Suporte completo",
+                      "Garantia de 30 dias"
                     ].map((item, i) => (
                       <div key={i} className="flex items-center gap-2 text-xs text-white/80">
+                        <Check size={14} className="text-gray-400 shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-brand-green/5 border border-brand-green/20 rounded-2xl p-6">
+                  <h4 className="text-sm font-bold text-brand-green uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <Zap size={16} /> Pro — Ecossistema Completo
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3">
+                    {[
+                      "Tudo do plano Start",
+                      "Plataforma Primezys Hub",
+                      "Sala de sinais ao vivo",
+                      "Catalogação automática e diária",
+                      "Gestão de capital inteligente",
+                      "Melhores horários para operar",
+                      "Comunidade exclusiva (EM BREVE)",
+                      "Indicador OTC (EM BREVE)"
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-2 text-xs text-white/90 font-medium">
                         <Check size={14} className="text-brand-green shrink-0" />
                         <span>{item}</span>
                       </div>
@@ -176,7 +204,7 @@ export default function Pricing() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 {subscriptionOptions.map((opt, i) => (
                   <a 
                     key={i}
