@@ -65,6 +65,17 @@ export default function Pricing() {
       style: "border-[rgba(255,215,0,0.3)] bg-black shadow-[0_0_20px_rgba(255,215,0,0.05)]",
       btnStyle: "border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-black",
       delay: 0.5
+    },
+    {
+      name: "MENTORIA PRESENCIAL",
+      price: "12.990,00",
+      period: "",
+      features: ["Tudo incluso", "Presencial com Mentor", "Imersão completa", "Acompanhamento VIP", "Network exclusivo"],
+      button: "QUERO PRESENCIAL",
+      link: "https://wa.me/5566996280883",
+      style: "border-[rgba(0,191,255,0.3)] bg-brand-card hover:border-[rgba(0,191,255,0.6)] shadow-[0_0_20px_rgba(0,191,255,0.1)]",
+      btnStyle: "bg-[#00bfff] text-black font-bold uppercase hover:bg-[#33ccff]",
+      delay: 0.6
     }
   ];
 
@@ -231,7 +242,7 @@ export default function Pricing() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 items-center">
           {plans.map((plan, i) => (
             <motion.div
               key={i}
