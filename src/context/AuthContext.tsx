@@ -12,6 +12,8 @@ export type UserData = {
   email: string;
   pass: string;
   phone?: string;
+  name?: string;
+  group?: 'sinais' | 'mentoria';
 };
 
 type AuthContextType = {
@@ -19,7 +21,7 @@ type AuthContextType = {
   login: (email: string, pass: string) => Promise<boolean>;
   logout: () => void;
   users: UserData[];
-  addUser: (email: string, pass: string, phone?: string) => Promise<void>;
+  addUser: (email: string, pass: string, phone?: string, name?: string, group?: 'sinais' | 'mentoria') => Promise<void>;
   removeUser: (email: string) => Promise<void>;
   updateUserPassword: (email: string, newPass: string) => Promise<void>;
 };
@@ -102,9 +104,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem('@patreze:user');
   };
 
-  const addUser = async (email: string, pass: string, phone?: string) => {
+  const addUser = async (email: string, pass: string, phone?: string, name?: string, group?: 'sinais' | 'mentoria') => {
     email = email.toLowerCase().trim();
-    const newUser = { email, pass, phone: phone || '' };
+    const newUser = { email, pass, phone: phone || '', name: name || '', group: group || 'mentoria' };
     try {
       await setDoc(doc(db, 'students', email), newUser);
       await fetchStudents();

@@ -13,6 +13,10 @@ export default function VipModal({ isOpen, onClose }: { isOpen: boolean, onClose
   const [newEmail, setNewEmail] = useState('');
   const [newPass, setNewPass] = useState('');
   const [newPhone, setNewPhone] = useState('');
+  const [newName, setNewName] = useState('');
+  const [newGroup, setNewGroup] = useState<'sinais' | 'mentoria'>('mentoria');
+  
+  const [activeTab, setActiveTab] = useState<'mentoria' | 'sinais'>('mentoria');
   
   const [editingUser, setEditingUser] = useState<string | null>(null);
   const [editPassValue, setEditPassValue] = useState('');
@@ -32,10 +36,11 @@ export default function VipModal({ isOpen, onClose }: { isOpen: boolean, onClose
   const handleAddUser = (e: React.FormEvent) => {
     e.preventDefault();
     if (newEmail && newPass) {
-      addUser(newEmail, newPass, newPhone);
+      addUser(newEmail, newPass, newPhone, newName, newGroup);
       setNewEmail('');
       setNewPass('');
       setNewPhone('');
+      setNewName('');
     }
   };
   
@@ -136,6 +141,13 @@ export default function VipModal({ isOpen, onClose }: { isOpen: boolean, onClose
                   <h4 className="text-sm font-bold text-white mb-3">Adicionar Aluno</h4>
                   <form onSubmit={handleAddUser} className="space-y-3">
                     <input 
+                      type="text" 
+                      placeholder="Nome do aluno (opcional)" 
+                      value={newName}
+                      onChange={(e) => setNewName(e.target.value)}
+                      className="w-full bg-black/50 border border-white/10 rounded-lg py-2 px-4 text-white text-sm focus:outline-none focus:border-brand-green/50"
+                    />
+                    <input 
                       type="email" 
                       placeholder="E-mail do aluno" 
                       value={newEmail}
@@ -158,6 +170,16 @@ export default function VipModal({ isOpen, onClose }: { isOpen: boolean, onClose
                       onChange={(e) => setNewPhone(e.target.value)}
                       className="w-full bg-black/50 border border-white/10 rounded-lg py-2 px-4 text-white text-sm focus:outline-none focus:border-brand-green/50"
                     />
+                    <div className="flex gap-2">
+                       <label className="flex items-center gap-2 text-sm text-brand-muted cursor-pointer">
+                         <input type="radio" checked={newGroup === 'mentoria'} onChange={() => setNewGroup('mentoria')} className="accent-brand-green" />
+                         Mentoria
+                       </label>
+                       <label className="flex items-center gap-2 text-sm text-brand-muted cursor-pointer">
+                         <input type="radio" checked={newGroup === 'sinais'} onChange={() => setNewGroup('sinais')} className="accent-brand-green" />
+                         Sala de Sinal
+                       </label>
+                    </div>
                     <button type="submit" className="w-full py-2 bg-white/10 hover:bg-white/20 text-white font-bold text-sm rounded-lg flex items-center justify-center gap-2 transition-colors">
                       <UserPlus size={16} /> Adicionar
                     </button>
@@ -165,15 +187,29 @@ export default function VipModal({ isOpen, onClose }: { isOpen: boolean, onClose
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-bold text-white mb-3 border-t border-white/10 pt-4">Alunos Cadastrados</h4>
-                  {users.length === 0 ? (
-                    <p className="text-xs text-brand-muted italic">Nenhum aluno cadastrado yet.</p>
+                  <div className="flex items-center gap-4 border-b border-white/10 mb-3 pb-3">
+                    <button 
+                      onClick={() => setActiveTab('mentoria')} 
+                      className={`text-sm font-bold ${activeTab === 'mentoria' ? 'text-brand-green' : 'text-white/50 hover:text-white'}`}
+                    >
+                      Mentoria ({users.filter(u => u.group !== 'sinais').length})
+                    </button>
+                    <button 
+                      onClick={() => setActiveTab('sinais')} 
+                      className={`text-sm font-bold ${activeTab === 'sinais' ? 'text-brand-green' : 'text-white/50 hover:text-white'}`}
+                    >
+                      Sala de Sinal ({users.filter(u => u.group === 'sinais').length})
+                    </button>
+                  </div>
+                  {users.filter(u => activeTab === 'mentoria' ? u.group !== 'sinais' : u.group === 'sinais').length === 0 ? (
+                    <p className="text-xs text-brand-muted italic">Nenhum aluno nesta categoria.</p>
                   ) : (
                     <ul className="space-y-2 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar">
-                      {users.map((u, i) => (
+                      {users.filter(u => activeTab === 'mentoria' ? u.group !== 'sinais' : u.group === 'sinais').map((u, i) => (
                         <li key={i} className="flex flex-col p-3 bg-black/30 rounded-lg border border-white/5">
                           <div className="flex items-center justify-between">
                             <div>
+                              {u.name && <p className="text-sm font-bold text-brand-green mb-0.5">{u.name}</p>}
                               <p className="text-sm text-white font-medium">{u.email}</p>
                               {editingUser === u.email ? (
                                 <div className="flex items-center gap-2 mt-1">
