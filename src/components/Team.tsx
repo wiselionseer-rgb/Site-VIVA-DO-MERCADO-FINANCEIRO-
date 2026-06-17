@@ -12,16 +12,6 @@ const teamMembers = [
       instagram: "#",
       linkedin: "#"
     }
-  },
-  {
-    name: "Lucas & Alessandra",
-    role: "Diretores de Marketing & Suporte",
-    image: "/lucas-alessandra.jpg",
-    bio: "Responsáveis pelo suporte e apoio estratégico da Primezys. Com uma dedicação de 23 horas por dia, eles garantem que a nossa comunidade tenha todo o suporte necessário para operar com tranquilidade e foco nos resultados.",
-    social: {
-      instagram: "#",
-      linkedin: "#"
-    }
   }
 ];
 

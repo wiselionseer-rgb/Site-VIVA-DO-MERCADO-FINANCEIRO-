@@ -25,7 +25,7 @@ export default function Pricing() {
       period: " único",
       features: ["Acesso a todos os modulos curso completo", "Acesso vitalício", "Todas atualizações", "Acesso à Área VIP"],
       button: "COMPRAR",
-      link: "https://wa.me/5566996280883",
+      link: "https://wa.me/5565999224222",
       style: "border-[rgba(57,255,20,0.3)] bg-brand-card hover:border-[rgba(57,255,20,0.6)] hover:shadow-[0_0_20px_rgba(57,255,20,0.15)]",
       btnStyle: "bg-brand-green text-black hover:bg-[#a3ff20] hover:shadow-[0_0_15px_rgba(57,255,20,0.4)]",
       delay: 0.2
@@ -37,7 +37,7 @@ export default function Pricing() {
       period: "/mês",
       features: ["Tudo do curso", "Aulas ao vivo semanais", "Comunidade premium", "Sinais inclusos", "Acesso à Área VIP"],
       button: "QUERO COMEÇAR",
-      link: "https://wa.me/5566996280883",
+      link: "https://wa.me/5565999224222",
       style: "border-brand-green bg-[rgba(57,255,20,0.05)] scale-100 lg:scale-105 z-10 shadow-[0_0_40px_rgba(57,255,20,0.25)]",
       btnStyle: "bg-brand-green text-black animate-pulse-shadow uppercase font-bold hover:bg-[#a3ff20]",
       delay: 0.3
@@ -48,7 +48,7 @@ export default function Pricing() {
       period: "",
       features: ["Tudo do grupo", "Sessões 1:1", "Acompanhamento diário", "Plano personalizado", "Acesso à Área VIP"],
       button: "QUERO 1:1",
-      link: "https://wa.me/5566996280883",
+      link: "https://wa.me/5565999224222",
       style: "border-[rgba(255,215,0,0.2)] bg-brand-card hover:border-[rgba(255,215,0,0.4)]",
       btnStyle: "bg-brand-gold text-black hover:opacity-90",
       delay: 0.4
@@ -61,7 +61,7 @@ export default function Pricing() {
       period: "",
       features: ["Tudo incluso", "Suporte vitalício", "Futuros cursos GRÁTIS", "Sala VIP / Mastermind", "Acesso à Área VIP"],
       button: "QUERO O BLACK",
-      link: "https://wa.me/5566996280883",
+      link: "https://wa.me/5565999224222",
       style: "border-[rgba(255,215,0,0.3)] bg-black shadow-[0_0_20px_rgba(255,215,0,0.05)]",
       btnStyle: "border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-black",
       delay: 0.5
@@ -72,7 +72,7 @@ export default function Pricing() {
       period: "",
       features: ["Tudo incluso", "Presencial com Mentor", "Imersão completa", "Acompanhamento VIP", "Network exclusivo"],
       button: "QUERO PRESENCIAL",
-      link: "https://wa.me/5566996280883",
+      link: "https://wa.me/5565999224222",
       style: "border-[rgba(0,191,255,0.3)] bg-brand-card hover:border-[rgba(0,191,255,0.6)] shadow-[0_0_20px_rgba(0,191,255,0.1)]",
       btnStyle: "bg-[#00bfff] text-black font-bold uppercase hover:bg-[#33ccff]",
       delay: 0.6
@@ -236,7 +236,7 @@ export default function Pricing() {
 
               <div className="mt-10 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <a 
-                  href="https://wa.me/5566996280883"
+                  href="https://wa.me/5565999224222"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 group"
